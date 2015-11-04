@@ -27,10 +27,21 @@ int global_init(int argv_g,char* argc_g[])
 	}
 	else if(strcmp(pre_f,argc_g[1])==0)
 	{
-		printf("open file\n");
-		save_pre("file.txt");
+		printf("argc_g[2] is:%s\n",argc_g[2]);
+		//printf("open file\n");
+		save_pre(argc_g[2]);
+	}
+	else
+	{
+		show_wrong_pre();
 	}
 	return 0;
+}
+
+void show_wrong_pre(void)
+{
+	printf("The pres you input was wrong.\n");
+	printf("Press -h for help.\n");
 }
 
 void show_helpfile(void)

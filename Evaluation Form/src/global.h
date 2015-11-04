@@ -9,6 +9,7 @@
 //#define MODE_DEBUG
 int global_init(int argv_g,char* argc_g[]);
 void check_flag(int flag);
+void show_wrong_pre(void);
 void show_helpfile(void);
 
 #endif

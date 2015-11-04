@@ -7,6 +7,6 @@
 int main(int argv,char*argc[]) {
 	int flag_global = global_init(argv,argc);
 	//init_table();
-	system("pause");
+	//system("pause");
 	return EXIT_SUCCESS;
 }
