@@ -2,6 +2,7 @@
 #include <string.h>
 #include "global.h"
 #include "module.h"
+#include "files.h"
 
 int global_init(int argv_g,char* argc_g[])
 {
@@ -27,6 +28,7 @@ int global_init(int argv_g,char* argc_g[])
 	else if(strcmp(pre_f,argc_g[1])==0)
 	{
 		printf("open file\n");
+		save_pre("file.txt");
 	}
 	return 0;
 }
