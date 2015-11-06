@@ -23,7 +23,7 @@ int global_init(int argv_g,char* argc_g[])
 	}
 	else if(strcmp(pre_d,argc_g[1])==0)
 	{
-		get_item_score();
+		get_total_score();
 	}
 	else if(strcmp(pre_f,argc_g[1])==0)
 	{

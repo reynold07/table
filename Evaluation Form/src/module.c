@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "items.h"
 #include "module.h"
 #include "files.h"
 
@@ -65,7 +66,7 @@ void print_table_items(void)
 	printf("Read the items and input the scores now?(y/n)\n");
 	check_input=check_y_or_n();
 	if(check_input == 1){
-		get_item_score();
+		get_total_score();
 	}
 	else{
 		printf("exit!\n");
@@ -112,12 +113,12 @@ int check_y_or_n(void)
 	}
 }
 
-void get_item_score(void)
+void get_total_score(void)
 {
 	float sum = 0;
 	float get_score = 0;
 	printf("Read the items and input the scores.\n");
-	printf("1.Full one hour of overtime, minus 0.02. (1)\n");
+	printf("Full one hour of overtime, minus 0.02. (1)\n");
 	scanf("%f",&get_score);
 	sum += get_score;
 	printf("The strength to working, over 95%%, or less than 70%%, to 0. (0.5)\n");
@@ -145,6 +146,21 @@ void get_item_score(void)
 	printf("Score:%f\n",sum);
 }
 
+float get_item_score(char* item,float item_score)
+{
+
+	return item_score;
+}
+
+int check_input_score(float score_in,float score)
+{
+	if((score_in >= 0)&&(score_in<= score)){
+		return PARA_LEGAL;
+	}
+	else{
+		return PARA_ILLEGAL;
+	}
+}
 
 
 
