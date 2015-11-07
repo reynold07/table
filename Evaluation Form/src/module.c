@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "items.h"
 #include "module.h"
 #include "files.h"
+
+//static float score_store[NUM_ITEM+1]={0};
 
 void init_table(void)
 {
@@ -34,9 +37,8 @@ int print_table_ask(void)
 	printf("Start the table!\n");
 	printf("press y to start,or press q to quit!(y/q)\n");
 	scanf("%c",&cinput);
-	//cnone = getchar();
 	scanf("%c",&cnone);//get chat '\n'
-	//fflush(stdin);
+	fflush(stdin);
 	if(cinput == 'y')
 	{
 		//print_table_items();
@@ -66,10 +68,37 @@ void print_table_items(void)
 	printf("Read the items and input the scores now?(y/n)\n");
 	check_input=check_y_or_n();
 	if(check_input == 1){
-		get_total_score();
+		show_items_store("NULL");
 	}
 	else{
 		printf("exit!\n");
+	}
+}
+
+void show_items_store(char* file_name){
+	float score_store[NUM_ITEM+1];
+	char cname[FILENAME_LENGTH];
+	get_total_score(score_store);
+	int i;
+	for(i=0;i<NUM_ITEM+1;i++)
+	{
+		printf("%f  ",score_store[i]);
+		printf("\n");
+	}
+	if(strcmp(file_name, "NULL")==0)
+	{
+		printf("Input you filename to store your parameters\n");
+		scanf("%s",cname);
+	//	fflush(stdin);
+		printf("%s\n",cname);
+	}
+	else{
+		strcpy(cname,file_name);
+	}
+	//save_pre2(cname);
+	if(save_pre(cname,score_store,NUM_ITEM+1)==0)
+	{
+		printf("save parameters ok.\n");
 	}
 }
 
@@ -103,6 +132,7 @@ int check_y_or_n(void)
 	char cinput,cnone;
 	scanf("%c",&cinput);
 	scanf("%c",&cnone);
+	fflush(stdin);
 	if(cinput == 'y')
 	{
 		return 1;
@@ -113,6 +143,7 @@ int check_y_or_n(void)
 	}
 }
 
+/*
 void get_total_score(void)
 {
 	float sum = 0;
@@ -145,11 +176,38 @@ void get_total_score(void)
 	sum += get_score;
 	printf("Score:%f\n",sum);
 }
+*/
+
+void get_total_score(float item_store[]){
+	int i = 0;
+	float sum = 0;
+	float get_score = 0;
+	printf("Read the items and input the scores.\n");
+	for(i=0;i<NUM_ITEM;i++){
+		get_score = get_item_score(item_par[i],item_score[i]);
+		while(get_score == -1){
+			printf("input score error,again\n");
+			get_score = get_item_score(item_par[i],item_score[i]);
+		}
+		item_store[i]=get_score;
+		sum += get_score;
+	}
+	item_store[i]=sum;
+	printf("total is %f\n",sum);
+}
 
 float get_item_score(char* item,float item_score)
 {
-
-	return item_score;
+	float score_in = 0;
+	printf("%s, (%f)\n",item,item_score);
+	printf("type in the score:");
+	scanf("%f",&score_in);
+	if(check_input_score(score_in,item_score) == PARA_LEGAL){
+		return score_in;
+	}
+	else{
+		return -1;
+	}
 }
 
 int check_input_score(float score_in,float score)

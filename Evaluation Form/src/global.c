@@ -20,22 +20,28 @@ int global_init(int argv_g,char* argc_g[])
 	if(strcmp(pre_h,argc_g[1])==0)
 	{
 		show_helpfile();
+		return FLAG_HELP;
 	}
 	else if(strcmp(pre_d,argc_g[1])==0)
 	{
-		get_total_score();
+		show_items_store("NULL");
+		return FLAG_ITEM;
 	}
 	else if(strcmp(pre_f,argc_g[1])==0)
 	{
-		printf("argc_g[2] is:%s\n",argc_g[2]);
+		printf("filename is:%s\n",argc_g[2]);
 		//printf("open file\n");
-		save_pre(argc_g[2]);
+		show_items_store(argc_g[2]);
+		//save_pre(argc_g[2]);
+		//save_pre(argc_g[2],score_store,NUM_ITEM+1);
+		return FLAG_SKIP;
 	}
 	else
 	{
 		show_wrong_pre();
+		return FLAG_WRONG;
 	}
-	return 0;
+	return FLAG_NONE;
 }
 
 void show_wrong_pre(void)
@@ -46,9 +52,11 @@ void show_wrong_pre(void)
 
 void show_helpfile(void)
 {
-	printf("Help file:\n");
+	printf("You can add parameter -d to get the score input item.\n");
+	printf("You can add -f and the file's name to set the name of your parameter file.\n");
 }
 
+/*
 void check_flag(int flag)
 {
 	if(flag == FLAG_NONE)
@@ -68,3 +76,5 @@ void check_flag(int flag)
 
 		}
 }
+*/
+

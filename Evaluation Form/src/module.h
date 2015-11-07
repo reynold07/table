@@ -16,8 +16,10 @@ int print_table_ask(void);
 void print_table_items(void);
 int check_y_or_n(void);
 void show_items(void);
-void get_total_score(void);
+void show_items_store(char* file_name);
+void get_total_score(float item_store[]);
 float get_item_score(char* item,float item_score);
+int check_input_score(float score_in,float score);
 
 
 #endif
